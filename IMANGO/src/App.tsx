@@ -11,7 +11,7 @@ function App() {
   const [price, setPrice] = useState('')
   const [list, setlist] = useState<ExpenseItem[]>([])
   function handler(){
-    if(!(naame) || !(price)){
+    if(!(naame) || (!(price) || price[0] == '0')){
       return
     }
     const up: ExpenseItem = {
