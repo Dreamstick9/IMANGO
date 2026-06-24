@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import './App.css'
 
-
+type ExpenseItem = {
+  id: number;
+  name: string;
+  pese: string;
+}
 function App() {
   const [naame, setnaaame] = useState('')
   const [price, setPrice] = useState('')
-  const [list, setlist] = useState([])
+  const [list, setlist] = useState<ExpenseItem[]>([])
   function handler(){
     if(!(naame) || !(price)){
       return
     }
-    const up = {
+    const up: ExpenseItem = {
       id: Date.now(),
       name: naame,
       pese: price,
@@ -19,20 +23,23 @@ function App() {
     setnaaame('')
     setPrice('')
   }
-  function delo(x){
+  function delo(x: number){
     const nw = list.filter((i)=>{
       return i.id !== x
     })
     setlist(nw)
   }
-  const totalCost = list.reduce((sum, item) => sum + item.price, 0)
+  const total = list.reduce((sum, i) => sum + Number(i.pese), 0)
+
+
+
 
   return (
   <>
   <div className='flex h-screen w-screen items-center justify-center bg-[#000000]'>
     <div className='relative flex flex-col items-center h-[593px] w-[535px] bg-[#E4D8C4] pt-[78px]'>
       <h1 className="mb-6 w-[299px] text-left text-3xl font-normal text-gray-800">
-            TOTAL COST - {totalCost}$
+            TOTAL COST - {total}$
       </h1>
       <div className='flex w-[299px] h-[72px] bg-[#000000] rounded-2xl items-center justify-center'>
         <div className='flex w-[283.28px] h-[56px] bg-[#E4D8C4] rounded-2xl items-center justify-between px-2'>
